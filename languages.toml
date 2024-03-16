@@ -96,6 +96,7 @@ yaml-language-server = { command = "yaml-language-server", args = ["--stdio"] }
 zls = { command = "zls" }
 blueprint-compiler = { command = "blueprint-compiler", args = ["lsp"] }
 typst-lsp = { command = "typst-lsp" }
+ember-language-server = { command = "ember-language-server", args = ["--stdio"] }
 
 [language-server.ansible-language-server]
 command = "ansible-language-server"
@@ -3352,3 +3353,25 @@ indent = { tab-width = 4, unit = "\t" }
 [[grammar]]
 name = "supercollider"
 source = { git = "https://github.com/madskjeldgaard/tree-sitter-supercollider", rev = "3b35bd0fded4423c8fb30e9585c7bacbcd0e8095" }
+
+[[language]]
+name = "glimmer"
+scope = "source.glimmer"
+injection-regex = "hbs"
+file-types = [{ glob = "{app,addon}/{components,templates}/*.hbs" }]
+block-comment-tokens = { start = "{{!", end = "}}" }
+roots = ["package.json", "ember-cli-build.js"]
+grammar = "glimmer"
+language-servers = ["ember-language-server"]
+formatter = { command = "prettier", args = ['--parser', 'glimmer'] }
+
+[language.auto-pairs]
+'"' = '"'
+'{' = '}'
+'(' = ')'
+'<' = '>'
+"'" = "'"
+
+[[grammar]]
+name = "glimmer"
+source = { git = "https://github.com/ember-tooling/tree-sitter-glimmer", rev = "5dc6d1040e8ff8978ff3680e818d85447bbc10aa" }
