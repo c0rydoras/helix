@@ -111,7 +111,7 @@ impl Editor {
 
         let doc = doc_mut!(self, &doc_id);
         if let Some(version) = version {
-            if version != doc.version() {
+            if version != doc.version() && doc.language_id().unwrap() != "gts" {
                 let err = format!("outdated workspace edit for {path:?}");
                 log::error!("{err}, expected {} but got {version}", doc.version());
                 self.set_error(err);
